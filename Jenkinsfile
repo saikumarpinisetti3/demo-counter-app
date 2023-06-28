@@ -21,5 +21,14 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
+        stage('static code analysis'){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'obama') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
     }
 }
