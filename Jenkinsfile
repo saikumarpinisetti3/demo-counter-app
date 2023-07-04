@@ -11,11 +11,6 @@ pipeline{
                 sh 'mvn test'
             }
         }
-          stage('integration testing'){
-            steps{
-                sh 'mvn verify -DskipUnitTests'
-            }
-        }
         stage('Maven build'){
             steps{
                 sh 'mvn clean install'
@@ -24,7 +19,7 @@ pipeline{
         stage('static code analysis'){
             steps{
                 script{
-                   withSonarQubeEnv(credentialsId: 'metoo') {
+                   withSonarQubeEnv(credentialsId: 'this') {
                         sh 'mvn clean package sonar:sonar'
                     }
                 }
@@ -33,7 +28,7 @@ pipeline{
         stage('Quality gate status'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'metoo'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'this'
                 }
             }
         }
