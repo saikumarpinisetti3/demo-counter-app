@@ -28,7 +28,7 @@ pipeline{
         stage('Quality gate status'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'this'
+                   waitForQualityGate abortPipeline: false, credentialsId: 'this'
                 }
             }
         }
