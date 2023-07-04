@@ -44,6 +44,17 @@ pipeline{
             steps{
                 script{
                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID saikumarpinisetti/$JOB_NAME:latest'
+                }
+            }
+        }
+        stage('push image to the dockerhub'){
+            steps{
+                script{
+                    ithCredentials([string(credentialsId: 'secretdocker', variable: 'dockerhub_credential')]) {
+                        sh 'docker login -u saikumarpinisetti -p{dockerhub_credential}'
+                        sh 'docker image push saikumarpinisetti/$JOB_NAME:latest'
+                    }    
                 }
             }
         }
