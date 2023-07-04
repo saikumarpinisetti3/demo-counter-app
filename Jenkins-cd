@@ -1,11 +1,51 @@
 pipeline{
     agent any
 
+    parameters{
+        choice(name: 'action', choices: 'create\destroycluster', description: create\update\destroyeks)
+        string(name: 'cluster', defaultValue: 'demo-cluster', description: 'eks-cluster-name')
+        string(name: 'region', defaultValue: 'ap-south-1', description: 'eks-cluster-region')
+    }
+    environment{
+        ACCESS_KEY=credentials('AWS_ACCESS_KEY_ID')
+        SECRET_KEY=credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
     stages{
        stage('git checkout'){
         steps{
            git branch: 'main', url: 'https://github.com/saikumarpinisetti3/demo-counter-app.git'
         }
        }
+            stage('eks connect  '){
+        steps{
+            sh 'aws configure set aws_access_key_id "$ACCESS_KEY"'
+              sh 'aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"'
+                sh 'aws configure set regio ""'
+           sh  'aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}'
+        }
+       }
+
+
+      // stage('eks deploy'){
+        //    when { expression { params.action == 'create'}}
+        //steps{
+         //        scripts{
+             //        def apply = false
+            //         try{
+               //             input message: 'please confirm apply to initiate deployment', ok: 'Ready to apply the config'
+                 //           appy = true
+                   // }
+                    //catch(err){
+                      //      apply = false
+                        //    CurrentBuild.result = 'unstable'
+                    //}
+                   // if(apply){
+                     //   sh 'kubectl apply -f .'
+                   // }
+                //}
+        //}
+       //}
 }
 }
+     
