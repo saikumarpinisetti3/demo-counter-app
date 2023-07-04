@@ -15,6 +15,15 @@ pipeline{
             steps{
                 sh 'mvn clean install'
             }
-        }  
+        }
+        stage('static code analysis'){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'authentic') {
+                    sh 'mvn clean package sonar:sonar'
+                }
+                }
+            }
+        }
     }
 }
