@@ -51,7 +51,7 @@ pipeline{
         stage('push image to the dockerhub'){
             steps{
                 script{
-                    ithCredentials([string(credentialsId: 'secretdocker', variable: 'dockerhub_credential')]) {
+                    withCredentials([string(credentialsId: 'secretdocker', variable: 'dockerhub_credential')]) {
                         sh 'docker login -u saikumarpinisetti -p{dockerhub_credential}'
                         sh 'docker image push saikumarpinisetti/$JOB_NAME:latest'
                     }    
