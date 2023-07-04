@@ -52,7 +52,7 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'secretdocker', variable: 'dockerhub_credential')]) {
-                        sh 'docker login -u saikumarpinisetti0@gmail.com -p{dockerhub_credential}'
+                        sh 'docker login -u saikumarpinisetti -p Supershot#143'
                         sh 'docker image push saikumarpinisetti/$JOB_NAME:latest'
                     }    
                 }
