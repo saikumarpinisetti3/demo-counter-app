@@ -1,11 +1,12 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage ('git checkout:Git'){
-            steps{
-             git branch: 'main', url: 'https://github.com/saikumarpinisetti3/demo-counter-app.git'
+    stages {
+        stage('git checkout:Git') {
+            steps {
+                script {
+                    // Correct syntax for git checkout
+                    sh "git checkout -b main origin/main"
                 }
-
             }
         }
     }
