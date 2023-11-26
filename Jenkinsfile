@@ -8,5 +8,10 @@ pipeline {
                 // Git step to checkout the 'main' branch from the specified GitHub repository
             }
         }
+         stage('maven build'){
+                script{
+                    sh "mvn clean install"
+                }
+        }
     }
 }
