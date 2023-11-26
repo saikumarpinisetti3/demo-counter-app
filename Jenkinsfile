@@ -29,5 +29,13 @@ pipeline {
                 }
             }
         }
+        stage('static code analysis'){
+            steps{
+                script{
+                    sh "waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'"
+                }
+            }
+
+        }
     }
 }
