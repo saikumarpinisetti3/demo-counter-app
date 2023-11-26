@@ -32,6 +32,7 @@ pipeline {
         stage('static code analysis'){
             steps{
                 script{
+                    withSonarQubeEnv('sonarapi')
                     sh "waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'"
                 }
             }
