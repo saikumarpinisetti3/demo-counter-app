@@ -1,12 +1,11 @@
 pipeline {
-    agent any
+    agent any // This pipeline can run on any available agent
+
     stages {
-        stage('git checkout:Git') {
+        stage('git checkout:Git') { // Stage named "git checkout:Git"
             steps {
-                script {
-                    // Correct syntax for git checkout
-                    sh "git checkout -b main origin/main"
-                }
+                git branch: 'main', url: 'https://github.com/saikumarpinisetti3/demo-counter-app.git'
+                // Git step to checkout the 'main' branch from the specified GitHub repository
             }
         }
     }
