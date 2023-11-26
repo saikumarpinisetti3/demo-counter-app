@@ -34,17 +34,16 @@ pipeline {
         }
 
         stage('static code analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('sonarapi') {
-                        sh "mvn sonar:sonar"
-                        // Assuming 'sonar:sonar' is the Maven goal for SonarQube analysis
-                    }
-                }
-                script {
-                    sh "waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'"
-                }
+    steps {
+        script {
+            withSonarQubeEnv('sonarapi') {
+                sh "mvn sonar:sonar"
+                // Assuming 'sonar:sonar' is the Maven goal for SonarQube analysis
             }
+            waitForQualityGate abortPipeline: false
         }
+    }
+}
+
     }
 }
