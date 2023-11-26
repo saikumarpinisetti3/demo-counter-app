@@ -4,13 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Essential elements -->
+    <groupId>com.example</groupId>
+    <artifactId>my-project</artifactId>
+    <version>1.0.0</version>
+
     <!-- Other project configuration elements -->
 
     <dependencies>
+        <!-- Your dependencies go here -->
         <dependency>
-            <groupId>coll</groupId>
-            <artifactId>22</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.3</version>
         </dependency>
         <!-- Other dependencies can be added here -->
     </dependencies>
