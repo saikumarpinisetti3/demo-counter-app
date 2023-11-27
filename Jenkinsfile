@@ -40,7 +40,7 @@ pipeline {
                 sh "mvn sonar:sonar"
                 // Assuming 'sonar:sonar' is the Maven goal for SonarQube analysis
             }
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonarapi'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
         }
     }
 }
