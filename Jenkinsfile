@@ -47,7 +47,6 @@ pipeline {
         stage('docker image build'){
             steps{
                 script{
-                    sh "sudo su -"
                     sh "docker build -t frontcalc:v1 ."
                     sh "docker image tag frontcalc:v1 saikumarpinisetti/frontcalc:latest"
                 }
